@@ -49,7 +49,7 @@ public class HabitsTrackerSchemaActivity extends AppCompatActivity {
         }
     }
 
-    private void displayDatabaseInfo() {
+    public Cursor readDatabaseInfo() {
         // Create and/or open a database to read from
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
 
@@ -72,5 +72,7 @@ public class HabitsTrackerSchemaActivity extends AppCompatActivity {
                 null,
                 null,
                 null);
+
+    return cursor;
     }
 }

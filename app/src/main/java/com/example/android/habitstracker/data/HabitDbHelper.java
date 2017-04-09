@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.android.habitstracker.data.HabitsContract.HabitEntry;
 
+import static com.example.android.habitstracker.data.HabitsContract.HabitEntry.TABLE_NAME;
+
 /**
  * Created by teacher on 4/6/17.
  */
@@ -33,7 +35,7 @@ public class HabitDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         // Create a String that contains the SQL statement to create the habits table
-        String SQL_CREATE_HABITS_TABLE =  "CREATE TABLE " + HabitEntry.TABLE_NAME + " ("
+        String SQL_CREATE_HABITS_TABLE =  "CREATE TABLE " + TABLE_NAME + " ("
                 + HabitEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + HabitEntry.COLUMN_HABIT_NAME + " TEXT NOT NULL, "
                 + HabitEntry.COLUMN_HABIT_TIME + " INTEGER, "
@@ -49,5 +51,7 @@ public class HabitDbHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + HabitEntry.TABLE_NAME);
+        onCreate(db);
     }
 }
